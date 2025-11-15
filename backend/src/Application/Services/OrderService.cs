@@ -26,12 +26,12 @@ namespace Application.Services
 
         public Task<SalesOrder?> GetOrderByIdAsync(int id)
         {
-            return _orderRepository.GetByIdAsync(id); // Includes Customer + Lines
+            return _orderRepository.GetByIdAsync(id); 
         }
 
         public Task<IEnumerable<SalesOrder>> GetAllOrdersAsync()
         {
-            return _orderRepository.GetAllAsync(); // Includes Customer
+            return _orderRepository.GetAllAsync(); 
         }
 
         private void CalculateOrderTotals(SalesOrder order)
@@ -55,7 +55,7 @@ namespace Application.Services
             order.TotalTax = totalTax;
             order.TotalIncl = totalIncl;
 
-            // Keep original date if editing
+            
             if (order.OrderDate == default)
                 order.OrderDate = DateTime.Now;
         }

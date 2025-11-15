@@ -8,9 +8,7 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ------------------------------------------
-// CORS (Allow React & general use)
-// ------------------------------------------
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -21,9 +19,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-// ------------------------------------------
-// Add Controllers + FIX JSON CYCLIC LOOPS
-// ------------------------------------------
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -31,9 +26,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.WriteIndented = true;
     });
 
-// ------------------------------------------
-// Add DbContext (SQL Server + Migrations Assembly)
-// ------------------------------------------
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -41,37 +34,25 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     )
 );
 
-// ------------------------------------------
-// Dependency Injection - Repositories
-// ------------------------------------------
+
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
-// ------------------------------------------
-// Dependency Injection - Services
-// ------------------------------------------
+
+
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<ItemService>();
 builder.Services.AddScoped<PdfGenerator>();
 
-// ------------------------------------------
-// AutoMapper
-// ------------------------------------------
 builder.Services.AddAutoMapper(typeof(Program));
 
-// ------------------------------------------
-// Swagger
-// ------------------------------------------
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// ------------------------------------------
-// Middleware
-// ------------------------------------------
 app.UseCors("AllowAll");
 
 if (app.Environment.IsDevelopment())
@@ -84,9 +65,7 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 
-// ------------------------------------------
-// Seed Sample Data
-// ------------------------------------------
+
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();

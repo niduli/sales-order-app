@@ -19,34 +19,25 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // -------------------------------
-            // SalesOrder → SalesOrderLine (1:M)
-            // -------------------------------
+           
             modelBuilder.Entity<SalesOrder>()
                 .HasMany(o => o.Lines)
                 .WithOne(l => l.SalesOrder)
                 .HasForeignKey(l => l.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // -------------------------------
-            // SalesOrderLine → Item (M:1)
-            // -------------------------------
+          
             modelBuilder.Entity<SalesOrderLine>()
                 .HasOne(l => l.Item)
                 .WithMany(i => i.OrderLines)
                 .HasForeignKey(l => l.ItemId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // -------------------------------
-            // Decimal Precision Fixes
-            // -------------------------------
-
-            // Items
+           
             modelBuilder.Entity<Item>()
                 .Property(i => i.Price)
                 .HasPrecision(18, 2);
 
-            // SalesOrder Totals
             modelBuilder.Entity<SalesOrder>()
                 .Property(o => o.TotalExcl).HasPrecision(18, 2);
             modelBuilder.Entity<SalesOrder>()
@@ -54,7 +45,7 @@ namespace Infrastructure.Data
             modelBuilder.Entity<SalesOrder>()
                 .Property(o => o.TotalIncl).HasPrecision(18, 2);
 
-            // SalesOrderLine numeric fields
+            
             modelBuilder.Entity<SalesOrderLine>()
                 .Property(l => l.Quantity).HasPrecision(18, 2);
             modelBuilder.Entity<SalesOrderLine>()

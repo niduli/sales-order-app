@@ -36,17 +36,13 @@ function SalesOrder() {
     totalIncl: 0,
   });
 
-  // ============================
-  //  Load customers + items
-  // ============================
+  
   useEffect(() => {
     dispatch(fetchCustomers());
     dispatch(fetchItems());
   }, [dispatch]);
 
-  // ============================
-  //  Load editing order
-  // ============================
+ 
   useEffect(() => {
     if (!editingOrder) return;
 
@@ -66,7 +62,7 @@ function SalesOrder() {
     setOrder(normalized);
   }, [editingOrder]);
 
-  // --- Helpers ---
+  
   const recalcLine = (line) => {
     const qty = Number(line.quantity || 0);
     const price = Number(line.price || 0);

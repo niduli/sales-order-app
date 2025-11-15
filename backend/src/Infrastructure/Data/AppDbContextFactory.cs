@@ -9,7 +9,7 @@ namespace Infrastructure.Data
     {
         public AppDbContext CreateDbContext(string[] args)
         {
-            // Build configuration (from API project or root)
+            
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory()) 
                 .AddJsonFile("appsettings.json", optional: true)

@@ -6,12 +6,12 @@ namespace Domain.Entities
 
         public int OrderId { get; set; }
 
-        // Navigation to SalesOrder (required by EF config)
+       
         public SalesOrder? SalesOrder { get; set; }
 
         public int ItemId { get; set; }
 
-        // Navigation to Item
+       
         public Item? Item { get; set; }
 
         public decimal Quantity { get; set; }

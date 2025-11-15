@@ -30,12 +30,12 @@ namespace API.Services
                 PdfWriter.GetInstance(doc, stream);
                 doc.Open();
 
-                // Title
+             
                 var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20);
                 doc.Add(new Paragraph("SALES ORDER / INVOICE", titleFont));
                 doc.Add(new Paragraph("\n"));
 
-                // Order info
+              
                 var normal = FontFactory.GetFont(FontFactory.HELVETICA, 11);
                 doc.Add(new Paragraph($"Order No: SO-{order.Id}", normal));
                 doc.Add(new Paragraph($"Date: {DateTime.Now:yyyy-MM-dd}", normal));
@@ -45,7 +45,7 @@ namespace API.Services
                 doc.Add(new Paragraph($"{order.Customer.City}", normal));
                 doc.Add(new Paragraph("\n"));
 
-                // Table
+                
                 PdfPTable table = new PdfPTable(6);
                 table.WidthPercentage = 100;
                 var headers = new string[] { "Item Code", "Description", "Qty", "Price", "Tax%", "Total" };
@@ -70,7 +70,7 @@ namespace API.Services
                 doc.Add(table);
                 doc.Add(new Paragraph("\n"));
 
-                // Totals
+                
                 doc.Add(new Paragraph($"Total Excl: {order.TotalExcl:0.00}", normal));
                 doc.Add(new Paragraph($"Total Tax: {order.TotalTax:0.00}", normal));
                 doc.Add(new Paragraph($"Total Incl: {order.TotalIncl:0.00}", normal));

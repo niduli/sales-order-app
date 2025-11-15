@@ -29,12 +29,15 @@ namespace API.Controllers
                 id = o.Id,
                 customerName = o.Customer != null ? o.Customer.Name : "",
                 totalIncl = o.TotalIncl,
-                invoiceDate = o.OrderDate
+                
+                // Always return InvoiceDate (not OrderDate)
+                invoiceDate = o.InvoiceDate
             });
 
             return Ok(result);
         }
 
+    
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -49,7 +52,14 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] OrderDto dto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var order = _mapper.Map<SalesOrder>(dto);
+
+            // Ensure InvoiceDate is set
+            if (order.InvoiceDate == default)
+                order.InvoiceDate = DateTime.Now;
 
             var created = await _orderService.CreateOrderAsync(order);
 
@@ -60,7 +70,7 @@ namespace API.Controllers
         public async Task<IActionResult> Update(int id, [FromBody] OrderDto dto)
         {
             var existing = await _orderService.GetOrderByIdAsync(id);
-            if (existing == null) 
+            if (existing == null)
                 return NotFound();
 
             _mapper.Map(dto, existing);
