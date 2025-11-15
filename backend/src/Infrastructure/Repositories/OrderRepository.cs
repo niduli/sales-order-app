@@ -17,13 +17,15 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<SalesOrder>> GetAllAsync()
         {
             return await _context.SalesOrders
-                .Include(o => o.Lines)
+                .Include(o => o.Customer)   // <-- FIXED: Load Customer
+                .Include(o => o.Lines)      // <-- Load Lines
                 .ToListAsync();
         }
 
         public async Task<SalesOrder?> GetByIdAsync(int id)
         {
             return await _context.SalesOrders
+                .Include(o => o.Customer)   // <-- FIXED
                 .Include(o => o.Lines)
                 .FirstOrDefaultAsync(o => o.Id == id);
         }

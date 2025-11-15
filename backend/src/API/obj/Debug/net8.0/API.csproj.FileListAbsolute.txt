@@ -144,3 +144,10 @@ D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\obj\Debug\net8.
 D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\obj\Debug\net8.0\API.pdb
 D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\obj\Debug\net8.0\API.genruntimeconfig.cache
 D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\obj\Debug\net8.0\ref\API.dll
+D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\bin\Debug\net8.0\iTextSharp.LGPLv2.Core.dll
+D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\bin\Debug\net8.0\SkiaSharp.dll
+D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\bin\Debug\net8.0\runtimes\osx\native\libSkiaSharp.dylib
+D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\bin\Debug\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
+D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\bin\Debug\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
+D:\SPIL Labs technical assesment\sales-order-app\backend\src\API\bin\Debug\net8.0\runtimes\win-x86\native\libSkiaSharp.dll

@@ -1,5 +1,4 @@
 using Application.Interfaces;
-using Application.Services;
 using AutoMapper;
 using API.Models;
 using Domain.Entities;
@@ -24,7 +23,16 @@ namespace API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var orders = await _orderService.GetAllOrdersAsync();
-            return Ok(orders);
+
+            var result = orders.Select(o => new
+            {
+                id = o.Id,
+                customerName = o.Customer != null ? o.Customer.Name : "",
+                totalIncl = o.TotalIncl,
+                invoiceDate = o.OrderDate
+            });
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -52,9 +60,9 @@ namespace API.Controllers
         public async Task<IActionResult> Update(int id, [FromBody] OrderDto dto)
         {
             var existing = await _orderService.GetOrderByIdAsync(id);
-            if (existing == null) return NotFound();
+            if (existing == null) 
+                return NotFound();
 
-            // Map updated values
             _mapper.Map(dto, existing);
 
             var updated = await _orderService.UpdateOrderAsync(existing);
